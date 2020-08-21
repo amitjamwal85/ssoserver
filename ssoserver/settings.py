@@ -16,7 +16,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'simple_sso.sso_server',
     'rest_framework',
-    'rest_framework.authtoken'  # Basic Token
+    'rest_framework.authtoken',  # Basic Token
+    'django_filters'
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,6 @@
 from django.contrib.auth.models import User
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
@@ -8,8 +10,12 @@ from restapp.serializers import UserSerializer, RegisterUserSerializer
 
 
 class UserAPIView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated, )
+    __basic_fields = ('username', 'first_name', 'last_name')
+    permission_classes = (AllowAny, )
     serializer_class = UserSerializer
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+    filter_fields = __basic_fields
+    search_fields = __basic_fields
     queryset = User.objects.all()
     lookup_field = 'pk'
 
