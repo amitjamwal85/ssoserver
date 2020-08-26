@@ -17,7 +17,11 @@ INSTALLED_APPS = [
     'simple_sso.sso_server',
     'rest_framework',
     'rest_framework.authtoken',  # Basic Token
-    'django_filters'
+    'django_filters',
+
+    'oauth2_provider',  # for social Oauth API
+    'social_django',  # for social Oauth API
+    'rest_framework_social_oauth2',  # for social Oauth API
 ]
 
 MIDDLEWARE = [
@@ -30,13 +34,25 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookAppOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+TEMPLATE_CONTEXT_PROCESSORS = [
+    'social_django.context_processors.backends',  # for social Oauth API
+    'social_django.context_processors.login_redirect',  # for social Oauth API
+]
+
 ROOT_URLCONF = 'ssoserver.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -44,6 +60,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # for social Oauth API
+                'social_django.context_processors.login_redirect',  # for social Oauth API
             ],
         },
     },
@@ -89,6 +107,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',            # Basic Token
         'rest_framework_simplejwt.authentication.JWTAuthentication',    # JWT Token
+
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # for social Oauth API
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',  # for social Oauth API
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -115,3 +136,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = "/admin/"
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '256940478723106'
+SOCIAL_AUTH_FACEBOOK_SECRET = '7f80043529103a3e7f7d80af5e4e91ad'
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email'
+}

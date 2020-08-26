@@ -6,6 +6,7 @@ from rest_framework import routers
 from simple_sso.sso_server.server import Server
 
 from restapp.utils.get_basic_token import GetBasicTokenView
+from restapp.utils.get_oauth2_jwt_token import SocialConvertTokenView
 from restapp.views import UserAPIView
 from rest_framework_simplejwt import views as jwt_views
 
@@ -24,6 +25,10 @@ urlpatterns = [
     # JWT Token
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
+    # OAuth Social
+    path('auth/', include('rest_framework_social_oauth2.urls')),
+    url(r'^custom-auth/convert-token/', SocialConvertTokenView.as_view(), name='auth_create'),
 
 ]
 
