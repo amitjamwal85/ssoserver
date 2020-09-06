@@ -1,13 +1,13 @@
 from django.conf.urls import url
 from django.contrib import admin
-from django.contrib.auth.views import LoginView
 from django.urls import path, include
 from rest_framework import routers
 from simple_sso.sso_server.server import Server
 
+from restapp.api.celery_api import celery_task
 from restapp.utils.get_basic_token import GetBasicTokenView
 from restapp.utils.get_oauth2_jwt_token import SocialConvertTokenView
-from restapp.views import UserAPIView
+from restapp.api.user_api import UserAPIView
 from rest_framework_simplejwt import views as jwt_views
 
 test_server = Server()
@@ -29,6 +29,10 @@ urlpatterns = [
     # OAuth Social
     path('auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^custom-auth/convert-token/', SocialConvertTokenView.as_view(), name='auth_create'),
+
+    # Celery
+    path('celery_task/', celery_task),
+
 
 ]
 

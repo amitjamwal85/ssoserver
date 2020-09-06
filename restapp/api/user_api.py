@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from restapp.serializers import UserSerializer, RegisterUserSerializer
+from rest_framework.permissions import AllowAny
+from restapp.serializer.user_serializers import UserSerializer, RegisterUserSerializer
 
 
 class UserAPIView(viewsets.ModelViewSet):

@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     'oauth2_provider',  # for social Oauth API
     'social_django',  # for social Oauth API
     'rest_framework_social_oauth2',  # for social Oauth API
+
+    'django_celery_beat'
 ]
 
 MIDDLEWARE = [
@@ -145,3 +147,11 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id, name, email'
 }
+
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
