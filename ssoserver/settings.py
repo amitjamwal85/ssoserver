@@ -23,7 +23,8 @@ INSTALLED_APPS = [
     'social_django',  # for social Oauth API
     'rest_framework_social_oauth2',  # for social Oauth API
 
-    'django_celery_beat'
+    'django_celery_beat',
+    'restapp'
 ]
 
 MIDDLEWARE = [

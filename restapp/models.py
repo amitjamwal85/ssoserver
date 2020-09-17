@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class BillingTransaction(models.Model):
+    type = models.CharField(max_length=100, null=True)
+    amount = models.FloatField(default=0)
+    due_date = models.DateTimeField()
