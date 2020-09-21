@@ -5,6 +5,7 @@ from rest_framework import routers
 from simple_sso.sso_server.server import Server
 
 from restapp.api.celery_api import celery_task
+from restapp.api.test_inheritance_serializer import BillingTransactionListRestApi
 from restapp.utils.get_basic_token import GetBasicTokenView
 from restapp.utils.get_oauth2_jwt_token import SocialConvertTokenView
 from restapp.api.user_api import UserAPIView
@@ -33,7 +34,8 @@ urlpatterns = [
     # Celery
     path('celery_task/', celery_task),
 
-
+    # Inheritance  test
+    path('billing_transactions/', BillingTransactionListRestApi.as_view()),
 ]
 
 router = routers.SimpleRouter()
