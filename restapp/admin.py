@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from restapp.models import BillingTransaction
+from restapp.models.models import BillingTransaction
 
 
 class BillingTransactionAdmin(admin.ModelAdmin):

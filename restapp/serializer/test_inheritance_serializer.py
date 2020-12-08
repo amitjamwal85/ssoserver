@@ -1,6 +1,5 @@
 from rest_framework import serializers
-
-from restapp.models import BillingTransaction, ExpenseConnectRequestOngoingSupport, ExpenseConnectRequestBulkLesson, \
+from restapp.models.models import BillingTransaction, ExpenseConnectRequestOngoingSupport, ExpenseConnectRequestBulkLesson, \
     BulkLessonRequest, OngoingSupportRequest
 
 

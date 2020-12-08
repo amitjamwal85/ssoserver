@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from restapp.models import BillingTransaction
+from restapp.models.models import BillingTransaction
 from restapp.serializer.test_inheritance_serializer import BillingTransactionOutputSerializer
 
 

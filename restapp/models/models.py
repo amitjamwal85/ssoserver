@@ -1,6 +1,7 @@
 from django.db import models
 from model_utils.managers import InheritanceManager
 
+
 class BulkLessonRequest(models.Model):
     bl_number = models.CharField(max_length=100, null=True)
     bl_request_by = models.CharField(max_length=100, null=True)

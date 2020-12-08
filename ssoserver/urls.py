@@ -5,19 +5,20 @@ from rest_framework import routers
 from simple_sso.sso_server.server import Server
 
 from restapp.api.celery_api import celery_task
+from restapp.api.file_handle_api import FileHandleAPI
 from restapp.api.test_inheritance_serializer import BillingTransactionListRestApi
 from restapp.utils.get_basic_token import GetBasicTokenView
 from restapp.utils.get_oauth2_jwt_token import SocialConvertTokenView
 from restapp.api.user_api import UserAPIView
 from rest_framework_simplejwt import views as jwt_views
 
-test_server = Server()
+# test_server = Server()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     # SSO URLS
-    url(r'^server/', include(test_server.get_urls())),
+    # url(r'^server/', include(test_server.get_urls())),
     # path('login/', LoginView.as_view(template_name='login.html'), name='login'),
 
     # Basic Token
@@ -33,6 +34,9 @@ urlpatterns = [
 
     # Celery
     path('celery_task/', celery_task),
+
+    # Files Upload
+    path('files_upload/', FileHandleAPI.as_view()),
 
     # Inheritance  test
     path('billing_transactions/', BillingTransactionListRestApi.as_view()),
